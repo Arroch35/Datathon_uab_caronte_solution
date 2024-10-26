@@ -1,0 +1,35 @@
+[
+    {
+        "question": "What are the data structures of both Lists and Dictionary?",
+        "options": [
+            "A) tuples opalles",
+            "B) Lists tuples dictionaries",
+            "C) list tuples, dictionary tuple",
+            "D) tuples , dictionaries, variables"
+        ],
+        "correct": "A) tuples opalles",
+        "explanation": "tuples"
+    },
+    {
+        "question": "What is the difference between lists and dictionaries?",
+        "options": [
+            "A) Python list tuples",
+            "B) dictionary",
+            "C) is similar to hash tables in any other language",
+            "D) Dictionary contains body parts to help it move faster."
+        ],
+        "correct": "A) Python list tuples",
+        "explanation": "tuples"
+    },
+    {
+        "question": "What are the Data Structures in Python?",
+        "options": [
+            "A) list tuples, dictionaries, etc.",
+            "B) tree, graphs, etc.",
+            "C) list tuples dictionaries treey graphs",
+            "D) list of tasks"
+        ],
+        "correct": "A) list tuples, dictionaries, etc.",
+        "explanation": "    tuples  tuples  tuples  tuples  tuples  tuples  tuples  tuples  tuples  tuples  tuples  tuples  tuples  tuples  tuples  "
+    }
+]
