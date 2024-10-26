@@ -1,7 +1,7 @@
 import torch
 import pdfplumber
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
-from typing import List, Tuple
+from typing import List, Dict
 
 class EducationalPDFProcessor:
     def __init__(self, model_name="google/flan-t5-base"):
@@ -79,7 +79,7 @@ class EducationalPDFProcessor:
         
         return candidate_answers
 
-    def find_answers(self, text: str, questions: List[str], use_beam_search: bool = False) -> List[Tuple[str, List[str]]]:
+    def find_answers(self, text: str, questions: List[str], use_beam_search: bool = False) -> List[Dict[str, str]]:
         # Use T5 model to find possible answers to each generated question
         qa_pairs = []
         for question in questions:
@@ -119,7 +119,7 @@ class EducationalPDFProcessor:
         explanation = self.tokenizer.decode(output[0], skip_special_tokens=True)
         return explanation
 
-    def process_pdf_and_generate_qa(self, pdf_paths: List[str], max_questions: int = 3, use_beam_search: bool = False):
+    def process_pdf_and_generate_qa(self, pdf_paths: List[str], max_questions: int = 3, use_beam_search: bool = False) -> List[Dict[str, str]]:
         # Process entire workflow: extract text, generate questions, find answers, and generate explanations
         all_text = self.extract_text_from_multiple_pdfs(pdf_paths)
         questions = self.generate_questions(all_text, max_questions=max_questions, use_beam_search=use_beam_search)
@@ -128,36 +128,36 @@ class EducationalPDFProcessor:
         # Generate explanations for the most probable answers
         explained_qa_pairs = []
         for question, answers in qa_pairs:
-            if len(answers) > 1:
-                correct_answer = answers[0]  # Assuming the first answer is the most probable
-                explanation = self.generate_explanation(question, all_text, correct_answer, use_beam_search=use_beam_search)
-                
-                # Skip explanations that are a single number
-                if explanation.isdigit():
-                    explanation = "No valid explanation available."
-                    
-                explained_qa_pairs.append((question, answers, explanation, correct_answer))  # Include correct answer
+            entry = {"Q": question}
+            if len(answers) == 1:
+                # Single answer found, directly use it as the correct answer
+                correct_answer = answers[0]
+                entry["S"] = correct_answer
+                entry["E"] = self.generate_explanation(question, all_text, correct_answer, use_beam_search=use_beam_search)
+            elif len(answers) > 1:
+                # Multiple answers found
+                for i, answer in enumerate(answers, start=1):
+                    entry[f"A{i}"] = answer
+                entry["S"] = answers[0]  # Assuming the first answer is the most probable
+                entry["E"] = self.generate_explanation(question, all_text, answers[0], use_beam_search=use_beam_search)
             else:
-                explained_qa_pairs.append((question, [], "No valid answer options available.", None))
+                entry["S"] = "No valid answer options available."
+                entry["E"] = "No valid explanation available."
+
+            explained_qa_pairs.append(entry)
 
         return explained_qa_pairs
 
 # Usage
-pdf_paths = ["../data/L4c- lists.pdf"] 
+pdf_paths = ["../example.pdf"]
 processor = EducationalPDFProcessor()
 explained_qa_pairs = processor.process_pdf_and_generate_qa(pdf_paths, max_questions=3, use_beam_search=False)
 
-# Display the questions, answer options, and explanations
-for question, answers, explanation, correct_answer in explained_qa_pairs:
-    print(f"Question: {question}")
-    if answers:
-        for i, answer in enumerate(answers, 1):
-            print(f"Answer Option {i}: {answer}")
-    else:
-        print("No answer options available.")
-    if correct_answer:
-        print(f"Solution: {correct_answer}")
-    print(f"Explanation: {explanation}\n")
+# Display the output with numbered entries
+output = {index + 1: entry for index, entry in enumerate(explained_qa_pairs)}
+for index, entry in output.items():
+    print(f"{index}: {entry}")
+
 
 
 
