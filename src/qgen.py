@@ -2,6 +2,7 @@ import torch
 import pdfplumber
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 from typing import List, Dict
+import json  # Import json module
 
 class EducationalPDFProcessor:
     def __init__(self, model_name="google/flan-t5-base"):
@@ -125,38 +126,32 @@ class EducationalPDFProcessor:
         questions = self.generate_questions(all_text, max_questions=max_questions, use_beam_search=use_beam_search)
         qa_pairs = self.find_answers(all_text, questions, use_beam_search=use_beam_search)
         
-        # Generate explanations for the most probable answers
-        explained_qa_pairs = []
+        # Format the output as quiz questions
+        quiz_questions = []
         for question, answers in qa_pairs:
-            entry = {"Q": question}
-            if len(answers) == 1:
-                # Single answer found, directly use it as the correct answer
-                correct_answer = answers[0]
-                entry["S"] = correct_answer
-                entry["E"] = self.generate_explanation(question, all_text, correct_answer, use_beam_search=use_beam_search)
-            elif len(answers) > 1:
-                # Multiple answers found
-                for i, answer in enumerate(answers, start=1):
-                    entry[f"A{i}"] = answer
-                entry["S"] = answers[0]  # Assuming the first answer is the most probable
-                entry["E"] = self.generate_explanation(question, all_text, answers[0], use_beam_search=use_beam_search)
-            else:
-                entry["S"] = "No valid answer options available."
-                entry["E"] = "No valid explanation available."
+            entry = {"question": question}
+            options = [f"{chr(65 + i)}) {answer}" for i, answer in enumerate(answers[:4])]  # Limit to 4 options for A-D
+            entry["options"] = options
+            entry["correct"] = options[0] if options else "No valid answer options available."
+            entry["explanation"] = self.generate_explanation(question, all_text, answers[0], use_beam_search=use_beam_search) if options else "No valid explanation available."
+            quiz_questions.append(entry)
 
-            explained_qa_pairs.append(entry)
-
-        return explained_qa_pairs
+        return quiz_questions
 
 # Usage
 pdf_paths = ["../example.pdf"]
 processor = EducationalPDFProcessor()
-explained_qa_pairs = processor.process_pdf_and_generate_qa(pdf_paths, max_questions=3, use_beam_search=False)
+quiz_questions = processor.process_pdf_and_generate_qa(pdf_paths, max_questions=3, use_beam_search=False)
 
-# Display the output with numbered entries
-output = {index + 1: entry for index, entry in enumerate(explained_qa_pairs)}
-for index, entry in output.items():
-    print(f"{index}: {entry}")
+# Save the formatted output to a JSON file
+with open("quiz_questions.json", "w") as json_file:
+    json.dump(quiz_questions, json_file, indent=4)
+
+# Display the formatted output
+for question in quiz_questions:
+    print(question)
+
+
 
 
 
