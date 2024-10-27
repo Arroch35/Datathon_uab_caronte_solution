@@ -15,7 +15,7 @@ if 'quiz_scores' not in st.session_state:
     st.session_state.quiz_scores = []
 
 def load_or_generate_quiz_questions():
-    pdf_paths = [random.choice(["../example.pdf", "../example2.pdf"])]
+    pdf_paths = [random.choice(["../example.pdf", "../recursion.pdf"])]
     processor = EducationalPDFProcessor()
     return processor.process_pdf_and_generate_qa(pdf_paths, max_questions=3, use_beam_search=False)
 
