@@ -53,8 +53,8 @@ def user_statistics_page(navigate_to):
     data_neval = sqldf(neval_activities)
     topics = data_neval['nevaluations']
     performance = data_neval['activitat']
-    df_performance = pd.DataFrame({'Topic': topics, 'Performance': performance})
-    st.bar_chart(df_performance.set_index('Topic'))
+    df_performance = pd.DataFrame({'Tries': topics, 'Activity': performance})
+    st.bar_chart(df_performance.set_index('Tries'))
 
     st.button("Back to User Details", on_click=lambda: navigate_to('user_details'))
 
