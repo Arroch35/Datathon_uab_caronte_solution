@@ -27,7 +27,7 @@ def user_details_page(navigate_to):
             st.success("🎉 Congratulations! The predicted final mark indicates a pass.")
         else:
             st.error("⚠️ The predicted final mark indicates a fail.")
-            st.write("**Recommendation:** We suggest retaking a diagnostic test for improvement.")
+            st.write("**Recommendation:** We suggest retaking a quiz for improvement.")
 
         # "Back to User List" button
         st.button("Back to User List", on_click=lambda: navigate_to('user_list'))

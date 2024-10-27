@@ -1,34 +1,35 @@
 [
     {
-        "question": "What does a list contain?",
+        "question": "What is Python data structure and how are it related to data structures?",
         "options": [
             "A) tuples",
-            "B) number of elements = list elements. Tuples =",
-            "C) items",
-            "D) dictaries, dictionaries, bits"
+            "B) data type",
+            "C) DFGs in Lists. Lists",
+            "D) Data Structures"
         ],
         "correct": "A) tuples",
-        "explanation": "list tuples is just like the arrays, declared in other languages which is an ordered collection of data. It is very flexible as the items in a list do not need to be of the same type."
+        "explanation": "list tuples dictionary"
     },
     {
-        "question": "What are of the Python Data Structures?",
+        "question": "What are assorted data types of Python?",
         "options": [
-            "A) list tuples dictionary dictaries trees graphs",
-            "B) list tuples, dictionaries, etc.",
-            "C) list, tuples, dictionaries, etc."
+            "A) list, tuples,  dictionary",
+            "B) query, tree, if a number in the tree and a number in the petrel, then the tree and if a number in the petrel are empty then the list of these objects are empty or empty",
+            "C) Trees, graphs",
+            "D) Trees, graphs, etc."
         ],
-        "correct": "A) list tuples dictionary dictaries trees graphs",
-        "explanation": "dictaries tree graphs"
+        "correct": "A) list, tuples,  dictionary",
+        "explanation": "tuples, dictionary"
     },
     {
-        "question": "What are some examples of data structures in Python?",
+        "question": "What are the data structures in Python?",
         "options": [
-            "A) list tuples,  dictionary, tree, graphs",
-            "B) table tuples",
-            "C) lists, tuples, dictionaries, graphs, etc. Trees, graphs",
-            "D) list tuples, dictionaries, tree , graphs"
+            "A) Lists tuples dictionaries Trees, graphs",
+            "B) list tuples, dictionaries, etc",
+            "C) list tuples dictionary trees graphs",
+            "D) list tuples dictionaries tree graphs"
         ],
-        "correct": "A) list tuples,  dictionary, tree, graphs",
-        "explanation": "tuples, dictionary, tree, graphs"
+        "correct": "A) Lists tuples dictionaries Trees, graphs",
+        "explanation": "list tuples dictionaries tree , graphs"
     }
 ]

@@ -138,19 +138,6 @@ class EducationalPDFProcessor:
 
         return quiz_questions
 
-# Usage
-pdf_paths = ["../example.pdf"]
-processor = EducationalPDFProcessor()
-quiz_questions = processor.process_pdf_and_generate_qa(pdf_paths, max_questions=3, use_beam_search=False)
-
-# Save the formatted output to a JSON file
-with open("quiz_questions.json", "w") as json_file:
-    json.dump(quiz_questions, json_file, indent=4)
-
-# Display the formatted output
-for question in quiz_questions:
-    print(question)
-
 
 
 
