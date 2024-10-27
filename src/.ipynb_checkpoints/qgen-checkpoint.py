@@ -1,7 +1,8 @@
 import torch
 import pdfplumber
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
-from typing import List, Tuple
+from typing import List, Dict
+import json  # Import json module
 
 class EducationalPDFProcessor:
     def __init__(self, model_name="google/flan-t5-base"):
@@ -79,7 +80,7 @@ class EducationalPDFProcessor:
         
         return candidate_answers
 
-    def find_answers(self, text: str, questions: List[str], use_beam_search: bool = False) -> List[Tuple[str, List[str]]]:
+    def find_answers(self, text: str, questions: List[str], use_beam_search: bool = False) -> List[Dict[str, str]]:
         # Use T5 model to find possible answers to each generated question
         qa_pairs = []
         for question in questions:
@@ -119,50 +120,26 @@ class EducationalPDFProcessor:
         explanation = self.tokenizer.decode(output[0], skip_special_tokens=True)
         return explanation
 
-    def process_pdf_and_generate_qa(self, pdf_paths: List[str], max_questions: int = 3, use_beam_search: bool = False):
+    def process_pdf_and_generate_qa(self, pdf_paths: List[str], max_questions: int = 3, use_beam_search: bool = False) -> List[Dict[str, str]]:
         # Process entire workflow: extract text, generate questions, find answers, and generate explanations
         all_text = self.extract_text_from_multiple_pdfs(pdf_paths)
         questions = self.generate_questions(all_text, max_questions=max_questions, use_beam_search=use_beam_search)
         qa_pairs = self.find_answers(all_text, questions, use_beam_search=use_beam_search)
         
-        # Generate explanations for the most probable answers
-        explained_qa_pairs = []
+        # Format the output as quiz questions
+        quiz_questions = []
         for question, answers in qa_pairs:
-            if len(answers) == 1:
-                # Single answer found, directly use it as the correct answer
-                correct_answer = answers[0]
-                explanation = self.generate_explanation(question, all_text, correct_answer, use_beam_search=use_beam_search)
-                explained_qa_pairs.append((question, [correct_answer], explanation, correct_answer))
-            elif len(answers) > 1:
-                correct_answer = answers[0]  # Assuming the first answer is the most probable
-                explanation = self.generate_explanation(question, all_text, correct_answer, use_beam_search=use_beam_search)
-                
-                # Skip explanations that are a single number
-                if explanation.isdigit():
-                    explanation = "No valid explanation available."
-                    
-                explained_qa_pairs.append((question, answers, explanation, correct_answer))  # Include correct answer
-            else:
-                explained_qa_pairs.append((question, [], "No valid answer options available.", None))
+            entry = {"question": question}
+            options = [f"{chr(65 + i)}) {answer}" for i, answer in enumerate(answers[:4])]  # Limit to 4 options for A-D
+            entry["options"] = options
+            entry["correct"] = options[0] if options else "No valid answer options available."
+            entry["explanation"] = self.generate_explanation(question, all_text, answers[0], use_beam_search=use_beam_search) if options else "No valid explanation available."
+            quiz_questions.append(entry)
 
-        return explained_qa_pairs
+        return quiz_questions
 
-# Usage
-pdf_paths = ["../data/L4c- lists.pdf"] 
-processor = EducationalPDFProcessor()
-explained_qa_pairs = processor.process_pdf_and_generate_qa(pdf_paths, max_questions=3, use_beam_search=False)
 
-# Display the questions, answer options, and explanations
-for question, answers, explanation, correct_answer in explained_qa_pairs:
-    print(f"Question: {question}")
-    if answers:
-        for i, answer in enumerate(answers, 1):
-            print(f"Answer Option {i}: {answer}")
-    else:
-        print("No answer options available.")
-    if correct_answer:
-        print(f"Solution: {correct_answer}")
-    print(f"Explanation: {explanation}\n")
+
 
 
 

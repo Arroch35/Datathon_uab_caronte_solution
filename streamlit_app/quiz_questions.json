@@ -1,31 +1,35 @@
 [
     {
-        "question": "What are some of the data structures in Python?",
+        "question": "What is Python data structure and how are it related to data structures?",
         "options": [
-            "A) Lists, dictionaries, graphs",
-            "B) list tuples dictionaries Trees",
-            "C) list tuples dictionaries tree graphs",
-            "D) tree tuples and graphs"
+            "A) tuples",
+            "B) data type",
+            "C) DFGs in Lists. Lists",
+            "D) Data Structures"
         ],
-        "correct": "A) Lists, dictionaries, graphs",
-        "explanation": "list tuples"
+        "correct": "A) tuples",
+        "explanation": "list tuples dictionary"
     },
     {
-        "question": "What is the meaning of the word dictionary?",
+        "question": "What are assorted data types of Python?",
         "options": [
-            "A) hash tables"
+            "A) list, tuples,  dictionary",
+            "B) query, tree, if a number in the tree and a number in the petrel, then the tree and if a number in the petrel are empty then the list of these objects are empty or empty",
+            "C) Trees, graphs",
+            "D) Trees, graphs, etc."
         ],
-        "correct": "A) hash tables",
-        "explanation": ""
+        "correct": "A) list, tuples,  dictionary",
+        "explanation": "tuples, dictionary"
     },
     {
-        "question": "What is a data structure?",
+        "question": "What are the data structures in Python?",
         "options": [
-            "A) is just like a arrays which is an ordered collection of data so that it can be accessed more efficiently depending upon the situation. Data Structures are fundamentals of any programming language around which a program is built. Python helps to",
-            "B) a way of organizing data",
-            "C) dictionaries"
+            "A) Lists tuples dictionaries Trees, graphs",
+            "B) list tuples, dictionaries, etc",
+            "C) list tuples dictionary trees graphs",
+            "D) list tuples dictionaries tree graphs"
         ],
-        "correct": "A) is just like a arrays which is an ordered collection of data so that it can be accessed more efficiently depending upon the situation. Data Structures are fundamentals of any programming language around which a program is built. Python helps to",
-        "explanation": "python data type."
+        "correct": "A) Lists tuples dictionaries Trees, graphs",
+        "explanation": "list tuples dictionaries tree , graphs"
     }
 ]
