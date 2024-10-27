@@ -1,0 +1,31 @@
+[
+    {
+        "question": "What are some of the data structures in Python?",
+        "options": [
+            "A) Lists, dictionaries, graphs",
+            "B) list tuples dictionaries Trees",
+            "C) list tuples dictionaries tree graphs",
+            "D) tree tuples and graphs"
+        ],
+        "correct": "A) Lists, dictionaries, graphs",
+        "explanation": "list tuples"
+    },
+    {
+        "question": "What is the meaning of the word dictionary?",
+        "options": [
+            "A) hash tables"
+        ],
+        "correct": "A) hash tables",
+        "explanation": ""
+    },
+    {
+        "question": "What is a data structure?",
+        "options": [
+            "A) is just like a arrays which is an ordered collection of data so that it can be accessed more efficiently depending upon the situation. Data Structures are fundamentals of any programming language around which a program is built. Python helps to",
+            "B) a way of organizing data",
+            "C) dictionaries"
+        ],
+        "correct": "A) is just like a arrays which is an ordered collection of data so that it can be accessed more efficiently depending upon the situation. Data Structures are fundamentals of any programming language around which a program is built. Python helps to",
+        "explanation": "python data type."
+    }
+]

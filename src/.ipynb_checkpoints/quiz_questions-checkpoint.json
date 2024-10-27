@@ -1,0 +1,34 @@
+[
+    {
+        "question": "How do you find the data structure related to a Python data type?",
+        "options": [
+            "A) letter combining shape according to its shape of its parent, number, shape and symbol",
+            "B) tuples or dic[type 0] pairs",
+            "C) while preserving collections, you should have keys to help you understand what is inside the table. for us and e in it: \"resolve statement of table to have it. \" b.split() Function like string",
+            "D) numeric values and keys, or a variable number"
+        ],
+        "correct": "A) letter combining shape according to its shape of its parent, number, shape and symbol",
+        "explanation": "key tuples"
+    },
+    {
+        "question": "What is a data structure in Python?",
+        "options": [
+            "A) field, a table, or elements",
+            "B) tuples",
+            "C) list"
+        ],
+        "correct": "A) field, a table, or elements",
+        "explanation": "tuples"
+    },
+    {
+        "question": "What are some examples of data structures in Python?",
+        "options": [
+            "A) list tuples, dictionaries, etc.",
+            "B) tree tuples, dictionaries, trees, graphs",
+            "C) list tuples, dictionaries, graphs",
+            "D) list tuples, dictionaries, graphs."
+        ],
+        "correct": "A) list tuples, dictionaries, etc.",
+        "explanation": "tuples"
+    }
+]

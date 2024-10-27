@@ -1,0 +1,33 @@
+[
+    {
+        "question": "What are the content of the main article?",
+        "options": [
+            "A) Python Programming Language",
+            "B) Python Data Structures"
+        ],
+        "correct": "A) Python Programming Language",
+        "explanation": "Data Structures"
+    },
+    {
+        "question": "What is the definition of a dictionary?",
+        "options": [
+            "A) tuple",
+            "B) hash tables",
+            "C) hash table",
+            "D) map"
+        ],
+        "correct": "A) tuple",
+        "explanation": "tuples"
+    },
+    {
+        "question": "What are the data structures related to?",
+        "options": [
+            "A) data",
+            "B) Lists Python Lists are just like the arrays, declared in other languages which is an ordered collection of data so that it can be accessed more efficiently depending upon the situation. We can create a list in python",
+            "C) Lists Python Lists are just like the arrays, declared in other languages which is an ordered collection of data so that it can be accessed more efficiently depending upon the situation. Data Structures are fundamentals of any programming language around which",
+            "D) Data Types"
+        ],
+        "correct": "A) data",
+        "explanation": "list tuples, dictionaries"
+    }
+]
